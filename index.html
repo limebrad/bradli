@@ -11,8 +11,10 @@
       background: #fff0f3;
       color: #111;
       line-height: 1.6;
+      overflow-x: hidden;
     }
     main {
+      position: relative;
       max-width: 640px;
       margin: 0 auto;
       padding: 64px 24px;
@@ -29,10 +31,63 @@
     p {
       font-size: 1.05rem;
     }
+
+    /* ── карандашные звёздочки ───────────────────────────── */
+    .star-defs {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+    .doodles {
+      position: absolute;
+      inset: -14px;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .doodles svg {
+      position: absolute;
+      color: #8a8a99;                 /* графитовый карандаш */
+      filter: url(#pencil);
+    }
+    .doodles path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.1;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .star-lg { width: 72px; height: 72px; top: -16px; right: -10px; transform: rotate(12deg); }
+    .star-md { width: 44px; height: 44px; top: 100px; right: 16px; transform: rotate(-17deg); opacity: .8; }
+    .star-sm1 { width: 30px; height: 30px; top: 60px; left: -6px; transform: rotate(-24deg); }
+    .star-sm2 { width: 26px; height: 26px; bottom: 44px; left: 10px; transform: rotate(21deg); opacity: .85; }
+    .star-xs  { width: 20px; height: 20px; top: -2px; left: -2px; transform: rotate(9deg); opacity: .75; }
   </style>
 </head>
 <body>
+  <svg class="star-defs" aria-hidden="true">
+    <defs>
+      <filter id="pencil" x="-25%" y="-25%" width="150%" height="150%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2"/>
+      </filter>
+    </defs>
+    <g id="star">
+      <path d="M0 -24 L5.9 -7.8 L23.1 -7.6 L9.0 2.9 L14.4 19.3 L-0.2 9.9 L-14.1 19.6 L-9.3 3.1 L-22.7 -7.2 L-5.7 -7.5 Z"/>
+      <path d="M0.7 -23.6 L5.4 -7.2 L22.6 -8.0 L9.6 3.5 L13.8 19.6 L0.4 10.3 L-13.6 19.1 L-8.8 2.6 L-22.4 -7.9 L-5.1 -8.2 Z"
+            transform="translate(0.7 0.9)" opacity=".45"/>
+    </g>
+  </svg>
+
   <main>
+    <div class="doodles" aria-hidden="true">
+      <svg class="star-lg" viewBox="-26 -26 52 52"><use href="#star"/></svg>
+      <svg class="star-md" viewBox="-26 -26 52 52"><use href="#star"/></svg>
+      <svg class="star-sm1" viewBox="-26 -26 52 52"><use href="#star"/></svg>
+      <svg class="star-sm2" viewBox="-26 -26 52 52"><use href="#star"/></svg>
+      <svg class="star-xs" viewBox="-26 -26 52 52"><use href="#star"/></svg>
+    </div>
+
     <h1>limebrad</h1>
     <p class="subtitle">Учусь веб-разработке 🚀</p>
     <p>
